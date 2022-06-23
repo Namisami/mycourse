@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Главная</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
-<body>
-  {% block content %}
-  {% endblock content %}
+<body class="body" id="body">
+  <header class="header">
+    <nav class="header__nav nav">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="#" class="nav__link">
+            Альбомы
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#" class="nav__link">
+            Категории
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#" class="nav__link">
+            Пользователи
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+    {% block content %}
+    {% endblock content %}
+  </main>
+  <footer class="footer">
+    <a href="#body" class="footer__link">
+      К началу
+    </a>
+  </footer>
 </body>
 </html>

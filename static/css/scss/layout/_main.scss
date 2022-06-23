@@ -1,0 +1,48 @@
+@use "../abstract/variables";
+
+a {
+  text-decoration: none;
+}
+label {
+  display: none;
+}
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  &__title {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__albums, &__photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  &__album, &__photo {
+    border: 1px solid black;
+  }
+  &__new {
+    position: relative;
+  }
+  &__input {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &::after {
+      content: '';
+      background-image: url('../../../../media/albums/covers/new.svg');
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: grey;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+#id_photo_file {
+  cursor: pointer;
+}

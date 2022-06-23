@@ -7,6 +7,11 @@ class PictureForm(ModelForm):
     class Meta:
         model = Picture
         fields = ["photo_file"]
+    def __init__(self, *args, **kwargs):
+        super(PictureForm, self).__init__(*args, **kwargs)
+        self.fields['photo_file'].widget.attrs.update({
+            'class': 'main__input main__photo',
+        })
 
 
 class PictureMainEditForm(ModelForm):

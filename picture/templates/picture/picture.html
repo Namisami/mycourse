@@ -1,55 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-  <img src="{{ picture.photo_file.url }}" alt="Picture" width="500" height="500" style="object-fit: contain;">
+  <img class="main__full" src="{{ picture.photo_file.url }}" alt="Picture" width="500" height="500" style="object-fit: contain;">
   {% if form %}
-    <form method="post">
+    <form class="main__form form" method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Изменить</button>
+      <button class="form__submit" type="submit">Изменить</button>
     </form>
   {% else %}
     {% if picture.author %}
-      {{ picture.author }}
+      <p class="main__field">{{ picture.author }}</p>
     {% else %}
-      Автор не указан
+      <p class="main__field">Автор не указан</p>
     {% endif %}
-    <br>
-    {{ picture.upload_date }}<br>
+    <p class="main__field">{{ picture.upload_date }}</p>
     {% if picture.category %}
-      {{ picture.category }}
+      <p class="main__field">{{ picture.category }}</p>
     {% else %}
-      Категория не указана
+      <p class="main__field">Категория не указана</p>
     {% endif %}
-    <br>
     
     {% if picture.subcategory.count %}
       {% for subcategory in picture.subcategory.all %}
-        {{ subcategory }}
+        <p class="main__field">{{ subcategory }}</p>
       {% endfor %}
-      <a href="{% url 'edit_subcategory' picture.id %}">
-        Изменить категории
+      <a class="main__edit" href="{% url 'edit_subcategory' picture.id %}">
+        Изменить подкатегории
       </a>
     {% else %}
-      Подкатегории не указаны
-      {% if picture.subcategory.count %}
-      {% else %}
-        <a href="{% url 'edit_subcategory' picture.id %}">
-          Изменить категории
-        </a>
-      {% endif %}
       {% if picture.category %}
+        <p class="main__field">Подкатегории не указаны</p>
+        <a class="main__edit" href="{% url 'edit_subcategory' picture.id %}">
+          Изменить подкатегории
+        </a>
       {% else %}
-        Сперва укажите категории
+        <p class="main__field">Сперва укажите категории</p>
       {% endif %}
     {% endif %}
-    <br>
     {% if picture.description %}
-      {{ picture.description }}
+      <p class="main__field">{{ picture.description }}</p>
     {% else %}
-      Описание не указано
+      <p class="main__field">Описание не указано</p>
     {% endif %}
-    <br>
-    <a href="{% url 'edit' picture.id %}">
+    <a class="main__edit" href="{% url 'edit' picture.id %}">
       Редактировать
     </a>
   {% endif %}

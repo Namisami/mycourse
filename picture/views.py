@@ -20,6 +20,9 @@ def edit(request, picture_id):
     if request.method == 'POST':
         form = PictureMainEditForm(request.POST, instance=picture)
         if form.is_valid():
+            if request.POST.get("category") == '':
+                for subcategory in picture.subcategory.all():
+                    picture.subcategory.remove(subcategory.id)
             form.save()
             context = {
                 'form': form,

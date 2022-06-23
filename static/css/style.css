@@ -1,0 +1,70 @@
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.nav__item {
+  padding-right: 10px;
+}
+
+.header {
+  margin: 10px auto;
+  max-width: 900px;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: none;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.main__title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+}
+.main__albums, .main__photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+.main__album, .main__photo {
+  border: 1px solid black;
+}
+.main__new {
+  position: relative;
+}
+.main__input {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.main__input::after {
+  content: "";
+  background-image: url("../../../../media/albums/covers/new.svg");
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#id_photo_file {
+  cursor: pointer;
+}
+
+.footer {
+  max-width: 900px;
+  margin: 10px auto;
+}
+
+/*# sourceMappingURL=style.css.map */
