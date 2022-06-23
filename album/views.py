@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from album.models import Album
 from album.forms import AlbumForm, PictureForm
+from subcategory.models import Subcategory
 
 def index(request):
     albums = Album.objects.all()
@@ -14,11 +15,13 @@ def index(request):
 def album(request, album_id):
     album = Album.objects.get(id=album_id)
 
+    # Добавление фото
     if request.method == 'POST':
         form = PictureForm(request.POST, request.FILES)
         if form.is_valid():
             picture = form.save()
             album.picture.add(picture)
+            
             context = {
                 'form': form,
                 'album': album,

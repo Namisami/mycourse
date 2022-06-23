@@ -2,3 +2,4 @@
 *.toml
 .venv
 media
+*.bat

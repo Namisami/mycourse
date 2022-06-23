@@ -4,7 +4,7 @@
   <p> АЛЬБОМ </p>
   <p>{{ album.title }}</p>
   {% for picture in album.picture.all %}
-    <a>
+    <a href="{% url 'picture' picture.id %}">
       <img src="{{ picture.photo_file.url }}" alt="Picture of album" width="300" height="300" style="object-fit: cover;">
     </a>
   {% endfor %}
@@ -14,7 +14,4 @@
     {{ form.as_p }}
     <button type="submit">Загрузить новое</button>
   </form>
-  {% comment %} <a>
-    <a href="{% url 'add' %}">
-  </a> {% endcomment %}
 {% endblock %}
