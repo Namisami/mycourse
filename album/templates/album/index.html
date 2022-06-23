@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p>Альбомы</p>
+  {% for album in albums %}
+    <a href="{% url 'album' album.id %}">
+      <p>{{ album.title }}</p>
+      <img src="{{ album.cover.url }}" alt="Album cover" width="300" height="300" style="object-fit: cover;">
+    </a>
+  {% endfor %}
+  <a href="{% url 'create' albums.last.id %}">Создать новый альбом</a>
+{% endblock %}

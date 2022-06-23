@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p> АЛЬБОМ </p>
+  <p>{{ album.title }}</p>
+  {% for picture in album.picture.all %}
+    <a>
+      <img src="{{ picture.photo_file.url }}" alt="Picture of album" width="300" height="300" style="object-fit: cover;">
+    </a>
+  {% endfor %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Загрузить новое</button>
+  </form>
+  {% comment %} <a>
+    <a href="{% url 'add' %}">
+  </a> {% endcomment %}
+{% endblock %}
