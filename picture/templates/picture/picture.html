@@ -1,49 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
-  <img class="main__full" src="{{ picture.photo_file.url }}" alt="Picture" width="500" height="500" style="object-fit: contain;">
+  <div class="main__bread bread">
+    <a href="{% url 'index' %}" class="bread__link">Альбомы/</a>
+    <a href="{% url 'album' album.id %}" class="bread__link">{{ album.title }}/</a>
+  </div>
+  <img class="main__full" src="{{ picture.photo_file.url }}" alt="Picture" style="object-fit: contain;">
   {% if form %}
     <form class="main__form form" method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form }}
       <button class="form__submit" type="submit">Изменить</button>
     </form>
   {% else %}
-    {% if picture.author %}
-      <p class="main__field">{{ picture.author }}</p>
-    {% else %}
-      <p class="main__field">Автор не указан</p>
-    {% endif %}
-    <p class="main__field">{{ picture.upload_date }}</p>
-    {% if picture.category %}
-      <p class="main__field">{{ picture.category }}</p>
-    {% else %}
-      <p class="main__field">Категория не указана</p>
-    {% endif %}
-    
-    {% if picture.subcategory.count %}
-      {% for subcategory in picture.subcategory.all %}
-        <p class="main__field">{{ subcategory }}</p>
-      {% endfor %}
-      <a class="main__edit" href="{% url 'edit_subcategory' picture.id %}">
-        Изменить подкатегории
-      </a>
-    {% else %}
-      {% if picture.category %}
-        <p class="main__field">Подкатегории не указаны</p>
-        <a class="main__edit" href="{% url 'edit_subcategory' picture.id %}">
-          Изменить подкатегории
-        </a>
+    <div class="main__about">
+      {% if picture.author %}
+        <p class="main__field">Автор: {{ picture.author }}</p>
       {% else %}
-        <p class="main__field">Сперва укажите категории</p>
+        <p class="main__field">Автор не указан</p>
       {% endif %}
-    {% endif %}
-    {% if picture.description %}
-      <p class="main__field">{{ picture.description }}</p>
-    {% else %}
-      <p class="main__field">Описание не указано</p>
-    {% endif %}
-    <a class="main__edit" href="{% url 'edit' picture.id %}">
-      Редактировать
-    </a>
+      <p class="main__field">Дата загрузки: {{ picture.upload_date }}</p>
+      {% if picture.category %}
+        <p class="main__field">Категория: {{ picture.category }}</p>
+      {% else %}
+        <p class="main__field">Категория не указана</p>
+      {% endif %}
+      <div class="main__field">
+        Подкатегории:
+        {% if picture.subcategory.count %}
+          {% for subcategory in picture.subcategory.all %}
+            <p class="main__subcategory">{{ subcategory }}</p>
+          {% endfor %}
+          <a class="main__subcategory" href="{% url 'edit_subcategory' picture.id %}">
+            (редактировать)
+          </a>
+        {% else %}
+          {% if picture.category %}
+            <p class="main__subcategory">Подкатегории не указаны</p>
+            <a class="main__subcategory" href="{% url 'edit_subcategory' picture.id %}">
+              (редактировать)
+            </a>
+          {% else %}
+            <p class="main__subcategory">Сперва укажите категории</p>
+          {% endif %}
+        {% endif %}
+      </div>
+      
+      {% if picture.description %}
+        <p class="main__field">Описание: {{ picture.description }}</p>
+      {% else %}
+        <p class="main__field">Описание не указано</p>
+      {% endif %}
+      <a class="main__field" href="{% url 'edit' picture.id %}">
+        Редактировать
+      </a>
+    </div>
   {% endif %}
 {% endblock %}

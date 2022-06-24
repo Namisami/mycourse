@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if category %}
+    <h1 class="main__title">{{ category.title }}</h1>
+    <p class="main__description">{{ category.description }}</p>
+    <h2 class="main__subtitle">Подкатегории</h2>
+    <ul class="main__subcategories subcategories">
+      {% for subcategory in subcategories %}
+        <li class="subcategories__item">
+          <a class="subcategories__link" href="{% url 'subcategory' subcategory.id %}">{{ subcategory.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h1 class="main__title">Список категорий</h1>
+    <ul class="main__categories categories">
+      {% for category in categories %}
+        <li class="categories__item">
+          <a class="categories__link" href="{% url 'category' category.id %}">{{ category.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

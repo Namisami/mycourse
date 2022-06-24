@@ -1,4 +1,15 @@
 .footer {
-  max-width: 900px;
+  flex: 0 0 auto;
+  width: 900px;
   margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__fio {
+    width: 100%;
+  }
+  &__link {
+    right: 0;
+    top: -10px;
+  }
 }

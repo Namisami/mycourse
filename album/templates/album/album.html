@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block content %}
+  <a href="{% url 'index' %}" class="main__bread">Альбомы/</a>
   <h1 class="main__title">{{ album.title }}</h1>
-  <div class="main__photos">
+  <div class="main__photos photos">
     {% for picture in album.picture.all %}
-      <a class="main__photo" href="{% url 'picture' picture.id %}">
-        <img class="main__img" src="{{ picture.photo_file.url }}" alt="Picture of album" width="300" height="300" style="object-fit: cover;">
+      <a class="photos__photo" href="{% url 'picture' picture.id %}">
+        <img class="photos__img" src="{{ picture.photo_file.url }}" alt="Picture of album">
       </a>
     {% endfor %}
-    <form class="main__form form" method="post" enctype="multipart/form-data">
+    <form class="photos__photo new" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.photo_file }}
       <!-- <button class="form__submit" type="submit">Загрузить новое</button> -->

@@ -12,6 +12,16 @@
   max-width: 900px;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   text-decoration: none;
 }
@@ -21,7 +31,10 @@ label {
 }
 
 .main {
-  max-width: 900px;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 900px;
   margin: 0 auto;
 }
 .main__title {
@@ -31,21 +44,107 @@ label {
 }
 .main__albums, .main__photos {
   display: grid;
+  grid-template-rows: min-content;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-.main__album, .main__photo {
+.main__album {
   border: 1px solid black;
 }
 .main__new {
   position: relative;
 }
-.main__input {
+.main__create {
+  border: 1px solid black;
+  position: relative;
+}
+.main__create::after {
+  content: "";
+  background-image: url("../../../../media/albums/covers/newalbum.svg");
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.main__full {
+  width: 100%;
+  max-height: 500px;
+  margin: 15px auto;
+}
+.main__about {
+  margin: 0 auto;
+  max-width: 400px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+.main__field {
+  vertical-align: middle;
+  text-align: center;
+  padding: 2.5px 0;
+  word-wrap: break-word;
+}
+.main__field:nth-child(1) {
+  border-radius: 20px 20px 0 0;
+}
+.main__field:nth-child(2n) {
+  background-color: rgb(255, 213, 135);
+}
+.main__field:nth-last-child(1) {
+  display: block;
+  border-radius: 0 0 20px 20px;
+  background-color: rgb(255, 161, 72);
+}
+.main__bread {
+  display: inline;
+}
+.main__photo {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.form :nth-child(n) {
+  margin: 5px 0;
+}
+
+textarea {
+  resize: none;
+}
+
+.album__img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.photos__photo {
+  height: 300px;
+  border: 1px solid black;
+  width: 300px;
+}
+.photos__img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.new__input {
   width: 100%;
   height: 100%;
   position: relative;
+  cursor: pointer;
 }
-.main__input::after {
+.new__input::after {
   content: "";
   background-image: url("../../../../media/albums/covers/new.svg");
   background-size: contain;
@@ -58,13 +157,20 @@ label {
   left: 0;
 }
 
-#id_photo_file {
-  cursor: pointer;
-}
-
 .footer {
-  max-width: 900px;
+  flex: 0 0 auto;
+  width: 900px;
   margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer__fio {
+  width: 100%;
+}
+.footer__link {
+  right: 0;
+  top: -10px;
 }
 
 /*# sourceMappingURL=style.css.map */

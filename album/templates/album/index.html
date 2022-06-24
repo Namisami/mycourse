@@ -4,13 +4,13 @@
   <h1 class="main__title">Список альбомов</h1>
   <div class="main__albums">
     {% for album in albums %}
-      <a class="main__album" href="{% url 'album' album.id %}">
-        <p>{{ album.title }}</p>
-        <img src="{{ album.cover.url }}" alt="Album cover" width="300" height="300" style="object-fit: cover;">
+      <a class="main__album album" href="{% url 'album' album.id %}">
+        <p class="album__name">{{ album.title }}</p>
+        <img class="album__img" src="{{ album.cover.url }}" alt="Album cover">
       </a>
     {% endfor %}
+    <a class="main__create" href="{% url 'create' albums.last.id %}">
+      Создать новый альбом
+    </a>
   </div>
-  <a class="main__create" href="{% url 'create' albums.last.id %}">
-    Создать новый альбом
-  </a>
 {% endblock %}
