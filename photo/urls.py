@@ -10,7 +10,8 @@ urlpatterns = [
     path('albums/', include('album.urls')),
     path('picture/', include('picture.urls')),
     path('category/', include('category.urls')),
-    # path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('authentication.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

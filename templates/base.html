@@ -24,16 +24,29 @@
             Категории
           </a>
         </li>
-        <li class="nav__item">
-          <a href="#" class="nav__link">
-            Войти
-          </a>
-        </li>
-        <li class="nav__item">
-          <a href="#" class="nav__link">
-            Зарегистрироваться
-          </a>
-        </li>
+        {% if user.first_name %}
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              {{ user.first_name }}
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="{% url 'logout' %}" class="nav__link">
+              Выйти
+            </a>
+          </li>
+        {% else %}
+          <li class="nav__item">
+            <a href="{% url 'login' %}" class="nav__link">
+              Войти
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="{% url 'signup' %}" class="nav__link">
+              Зарегистрироваться
+            </a>
+          </li>
+        {% endif %}
       </ul>
     </nav>
   </header>

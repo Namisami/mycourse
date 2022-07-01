@@ -79,6 +79,9 @@ WSGI_APPLICATION = 'photo.wsgi.application'
 
 AUTH_USER_MODEL = 'authentication.User'
 
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = "index"
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

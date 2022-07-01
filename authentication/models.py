@@ -11,7 +11,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = models.ImageField(verbose_name="Аватарка", upload_to="users/photos", default="users/photos/placeholder.svg")
     bio = models.TextField(verbose_name="О себе", blank=True)
 
-    is_active = models.BooleanField(verbose_name='Активирован', default=False)
+    is_active = models.BooleanField(verbose_name='Активирован', default=True)
     is_staff = models.BooleanField(verbose_name='Персонал', default=False)
     is_superuser = models.BooleanField(verbose_name='Администратор', default=False)
 
