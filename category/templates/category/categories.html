@@ -7,10 +7,11 @@
     <ul class="main__subcategories subcategories">
       {% for subcategory in subcategories %}
         <li class="subcategories__item">
-          <a class="subcategories__link" href="{% url 'subcategory' subcategory.id %}">{{ subcategory.title }}</a>
+          <a class="subcategories__link" href="{% url 'subcategory' category.id subcategory.id %}">{{ subcategory.title }}</a>
         </li>
       {% endfor %}
     </ul>
+    <a href="{% url 'subcategory_create' category.id %}" class="main__subcategory-create">Создать подкатегорию</a>
   {% else %}
     <h1 class="main__title">Список категорий</h1>
     <ul class="main__categories categories">
@@ -20,5 +21,6 @@
         </li>
       {% endfor %}
     </ul>
+    <a href="{% url 'category_create' %}" class="main__category-create">Создать категорию</a>
   {% endif %}
 {% endblock %}

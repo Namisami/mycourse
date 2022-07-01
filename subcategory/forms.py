@@ -4,4 +4,4 @@ from subcategory.models import Subcategory
 class SubcategoryForm(ModelForm):
     class Meta:
         model = Subcategory
-        fields = ["category"]
+        fields = ["title", "description"]

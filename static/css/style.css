@@ -26,10 +26,6 @@ a {
   text-decoration: none;
 }
 
-label {
-  display: none;
-}
-
 .main {
   flex: 1 0 auto;
   display: flex;

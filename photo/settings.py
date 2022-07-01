@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My apps
-    # 'authentication',
+    'authentication',
     'album',
     'author',
     'category',
@@ -77,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'photo.wsgi.application'
 
-# AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'authentication.User'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

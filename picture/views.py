@@ -1,12 +1,11 @@
-from unicodedata import category
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from album.models import Album
+from category.models import Category
 from picture.models import Picture
 from picture.forms import PictureMainEditForm, PictureSubcategoryEditForm
 from subcategory.models import Subcategory
-from subcategory.forms import SubcategoryForm
 
 def picture(request, picture_id):
     picture = Picture.objects.get(id=picture_id)
@@ -19,12 +18,13 @@ def picture(request, picture_id):
 
 def edit(request, picture_id):
     picture = Picture.objects.get(id=picture_id)
+    category = picture.category
     album = Album.objects.get(picture=picture.id)
 
     if request.method == 'POST':
         form = PictureMainEditForm(request.POST, instance=picture)
         if form.is_valid():
-            if request.POST.get("category") != picture.category:
+            if Category.objects.get(id=request.POST.get("category")) != category:
                 for subcategory in picture.subcategory.all():
                     picture.subcategory.remove(subcategory.id)
             form.save()
@@ -40,6 +40,7 @@ def edit(request, picture_id):
 
 def edit_subcategory(request, picture_id):
     picture = Picture.objects.get(id=picture_id)
+    album = Album.objects.get(picture=picture.id)
 
     if request.method == 'POST':
         form = PictureSubcategoryEditForm(request.POST, instance=picture)
@@ -56,5 +57,6 @@ def edit_subcategory(request, picture_id):
     context = {
         'form': form,
         'picture': picture,
+        'album': album,
         }
     return render(request, 'picture/picture.html', context)
