@@ -24,9 +24,14 @@
             Категории
           </a>
         </li>
+        <li class="nav__item">
+          <a href="{% url 'authors' %}" class="nav__link">
+            Авторы
+          </a>
+        </li>
         {% if user.first_name %}
           <li class="nav__item">
-            <a href="#" class="nav__link">
+            <a href="{% url 'profile' %}" class="nav__link">
               {{ user.first_name }}
             </a>
           </li>

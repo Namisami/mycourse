@@ -4,6 +4,8 @@
 {% block content %}
   <a href="{% url 'index' %}" class="main__bread">Альбомы/</a>
   <h1 class="main__title">{{ album.title }}</h1>
+  <a href="{% url 'album_edit' album.id %}" class="main__edit">(редактировать)</a>
+  <a href="{% url 'album_delete' album.id %}" class="main__edit">(удалить)</a>
   <div class="main__photos photos">
     {% for picture in album.picture.all %}
       <a class="photos__photo" href="{% url 'picture' picture.id %}">

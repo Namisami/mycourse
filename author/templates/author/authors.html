@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="main__title">Список авторов</h1>
+  <div class="main__authors">
+    {% if authors %}
+      {% for author in authors %}
+        <a class="main__author author" href="#">
+          {% if author.nickname %}
+            {{ author.nickname}}
+          {% else %}
+            {{author.first_name}}
+            {{author.last_name}}
+          {% endif %}
+        </a>
+      {% endfor %}
+    {% else %}
+      <p>Авторов нет</p>
+    {% endif %}
+  </div>
+  <a href="{% url 'author_add' %}">Добавить автора</a>
+{% endblock %}

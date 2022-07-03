@@ -1,25 +1,33 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from album.models import Album
 from category.models import Category
 from picture.models import Picture
 from picture.forms import PictureMainEditForm, PictureSubcategoryEditForm
 from subcategory.models import Subcategory
+from authentication.models import User
 
+
+@login_required
 def picture(request, picture_id):
-    picture = Picture.objects.get(id=picture_id)
-    album = Album.objects.get(picture=picture.id)
+    user = User.objects.get(id=request.user.id)
+    picture = get_object_or_404(Picture, id=picture_id, owner=user)
+    album = get_object_or_404(Album, picture=picture.id, owner=user)
     context = {
         'picture': picture,
         'album': album,
         }
     return render(request, 'picture/picture.html', context)
 
+@login_required
 def edit(request, picture_id):
-    picture = Picture.objects.get(id=picture_id)
+    user = User.objects.get(id=request.user.id)
+    picture = get_object_or_404(Picture, id=picture_id, owner=user)
+    album = get_object_or_404(Album, picture=picture.id, owner=user)
     category = picture.category
-    album = Album.objects.get(picture=picture.id)
 
     if request.method == 'POST':
         form = PictureMainEditForm(request.POST, instance=picture)
@@ -38,9 +46,11 @@ def edit(request, picture_id):
         }
     return render(request, 'picture/picture.html', context)
 
+@login_required
 def edit_subcategory(request, picture_id):
-    picture = Picture.objects.get(id=picture_id)
-    album = Album.objects.get(picture=picture.id)
+    user = User.objects.get(id=request.user.id)
+    picture = get_object_or_404(Picture, id=picture_id, owner=user)
+    album = get_object_or_404(Album, picture=picture.id, owner=user)
 
     if request.method == 'POST':
         form = PictureSubcategoryEditForm(request.POST, instance=picture)
@@ -60,3 +70,11 @@ def edit_subcategory(request, picture_id):
         'album': album,
         }
     return render(request, 'picture/picture.html', context)
+    
+@login_required
+def delete(request, picture_id):
+    user = User.objects.get(id=request.user.id)
+    picture = get_object_or_404(Picture, id=picture_id, owner=user)
+    album = get_object_or_404(Album, picture=picture.id, owner=user)
+    picture.delete()
+    return HttpResponseRedirect(reverse('album', kwargs={'album_id': album.id}))

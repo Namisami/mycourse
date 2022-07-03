@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="main__title">Редактировать профиль</h1><br>
+  <form method="POST" action="" class="main__form form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="form__submit">
+      Изменить
+    </button>
+  </form>
+{% endblock %}

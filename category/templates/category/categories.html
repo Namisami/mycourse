@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
   {% if category %}
+    <a href="{% url 'categories' %}" class="main__bread">Категории/</a>
     <h1 class="main__title">{{ category.title }}</h1>
+    <a href="{% url 'category_edit' category.id %}" class="">(редактировать)</a>
+    <a href="{% url 'category_delete' category.id %}" class="">(удалить)</a>
     <p class="main__description">{{ category.description }}</p>
     <h2 class="main__subtitle">Подкатегории</h2>
     <ul class="main__subcategories subcategories">

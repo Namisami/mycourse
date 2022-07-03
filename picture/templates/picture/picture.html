@@ -53,6 +53,9 @@
       <a class="main__field" href="{% url 'edit' picture.id %}">
         Редактировать
       </a>
+      <a class="main__field" href="{% url 'picture_delete' picture.id %}">
+        Удалить
+      </a>
     </div>
   {% endif %}
 {% endblock %}

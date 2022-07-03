@@ -6,5 +6,7 @@ APP_NAME = "album"
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:album_id>/', views.album, name='album'),
+    path('<int:album_id>/edit/', views.edit, name='album_edit'),
+    path('<int:album_id>/delete/', views.delete, name='album_delete'),
     path('<int:latest_album_id>/create/', views.create, name='create'),
 ]
