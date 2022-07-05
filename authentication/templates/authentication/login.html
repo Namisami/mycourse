@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Войти</h2> 
+  <h1 class="main__title">Войти</h1> 
   
-  <form method="post">
+  <form class="main__form form" method="post">
     {% csrf_token %}
-    <table>
-      {{ form.as_p }}
-      <tr>
-        <td>&nbsp;</td>
-        <td><input type="submit" value="Подтвердить"></td>
-      </tr>                
-    </table>
+    {{ form }}
+    <button class="form__submit" type="submit">Изменить</button>           
   </form>
 {% endblock %}

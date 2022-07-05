@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1 class="main__title">Список авторов</h1>
+  <p class="main__count">(Всего: {{ authors.count }})</p>
   <div class="main__catalog catalog">
     {% if authors %}
       <ol class="catalog__list">

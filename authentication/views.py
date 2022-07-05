@@ -1,7 +1,9 @@
+from multiprocessing import context
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView
+from album.models import Album
 from authentication.forms import CustomUserCreationForm, CustomUserChangeForm
 from authentication.models import User
 

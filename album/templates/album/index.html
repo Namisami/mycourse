@@ -2,6 +2,19 @@
 
 {% block content %}
   <h1 class="main__title">Список альбомов</h1>
+  <p class="main__count">(Всего: {{ albums.count }})</p>
+  <form class="main__order order" action="{% url 'index' %}" method="get" id="sortAlbums">
+    {% if title %}
+      <button class="order__field" type="submit" name="orderby" value="title">По алфавиту</button>
+    {% else %}
+      <button class="order__field" type="submit" name="orderby" value="-title">По алфавиту(-)</button>
+    {% endif %}
+    {% if created_at %}
+      <button class="order__field" type="submit" name="orderby" value="created_at">По дате</button>
+    {% else %}
+      <button class="order__field" type="submit" name="orderby" value="-created_at">По дате(-)</button>
+    {% endif %}
+  </form>
   <div class="main__grid grid">
     {% for album in albums %}
       <a class="grid__element" href="{% url 'album' album.id %}">

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="main__title">Результаты поиска</h1>
+  {% if albums %}
+    <h2 class="main__subtitle">Альбомы</h2>
+  {% endif %}
+  {% if pictures %}
+    <h2 class="main__subtitle">Изображения</h2>
+  {% endif %}
+{% endblock %}

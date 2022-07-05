@@ -12,6 +12,7 @@
 
     <p class="main__description">{{ category.description }}</p>
     <h2 class="main__subtitle">Подкатегории</h2>
+    <p class="main__count">(Всего: {{ subcategories.count }})</p>
     <div class="main__catalog catalog">
       <ol class="catalog__list">
         {% for subcategory in subcategories %}
@@ -24,6 +25,7 @@
     </div>
   {% else %}
     <h1 class="main__title">Список категорий</h1>
+    <p class="main__count">(Всего: {{ categories.count }})</p>
     <div class="main__catalog catalog">
       <ol class="catalog__list">
         {% for category in categories %}

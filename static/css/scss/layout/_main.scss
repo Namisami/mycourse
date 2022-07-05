@@ -30,7 +30,7 @@ ol {
   }
   &__subtitle {
     font-size: 1.5em;
-    margin: 1em 0 ;
+    margin: 1em 0 0 0;
     font-weight: bold;
     text-align: center;
   }
@@ -83,10 +83,10 @@ ol {
     font-size: 1.5em;
     text-align: center;
   }
-  &__photo {
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
+  &__count {
+    font-size: 1.25em;
+    margin: 0 auto;
+    font-weight: bold;
   }
 }
 .about {
@@ -133,6 +133,19 @@ ol {
 }
 textarea {
   resize: none;
+}
+.order {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  &__field {
+    cursor: pointer;
+    font-size: 1em;
+    color: vars.$mainTextColor;
+    font-family: vars.$mainFont;
+    border: none;
+    background-color: transparent;
+  }
 }
 .grid {
   margin: 1em auto;
