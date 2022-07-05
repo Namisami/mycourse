@@ -2,21 +2,23 @@
 {% load static %}
 
 {% block content %}
-  <a href="{% url 'index' %}" class="main__bread">Альбомы/</a>
+  <div class="main__header">
+    <div class="main__bread bread">
+      <a href="{% url 'index' %}" class="bread__link">Альбомы/</a>
+    </div>
+    <a href="{% url 'album_edit' album.id %}" class="main__edit">Редактировать</a>
+      <a href="{% url 'album_delete' album.id %}" class="main__delete">Удалить</a>
+  </div>
   <h1 class="main__title">{{ album.title }}</h1>
-  <a href="{% url 'album_edit' album.id %}" class="main__edit">(редактировать)</a>
-  <a href="{% url 'album_delete' album.id %}" class="main__edit">(удалить)</a>
-  <div class="main__photos photos">
+  <div class="main__grid grid grid--album">    
     {% for picture in album.picture.all %}
-      <a class="photos__photo" href="{% url 'picture' picture.id %}">
-        <img class="photos__img" src="{{ picture.photo_file.url }}" alt="Picture of album">
+      <a class="grid__element" href="{% url 'picture' picture.id %}">
+        <img class="grid__img" src="{{ picture.photo_file.url }}" alt="Альбомная картинка">
       </a>
     {% endfor %}
-    <form class="photos__photo new" method="post" enctype="multipart/form-data">
+    <form class="grid__element form-picture" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.photo_file }}
-      <!-- <button class="form__submit" type="submit">Загрузить новое</button> -->
     </form>
   </div>
-  <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

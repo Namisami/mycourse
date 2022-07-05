@@ -74,11 +74,10 @@ def edit(request, album_id):
     return render(request, 'album/edit.html', context)
 
 @login_required
-def create(request, latest_album_id):
+def create(request):
     user = User.objects.get(id=request.user.id)
-    latest_album_id = int(latest_album_id) + 1
-    Album.objects.get_or_create(id=latest_album_id, owner=user)
-    return HttpResponseRedirect(reverse('album', kwargs={'album_id': latest_album_id}))
+    album = Album.objects.create(owner=user)
+    return HttpResponseRedirect(reverse('album', kwargs={'album_id': album.id}))
 
 @login_required
 def delete(request, album_id):

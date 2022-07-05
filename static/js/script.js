@@ -3,10 +3,12 @@ function main() {
 }
 
 function autoFormSubmit() {
-  const photo_file = document.querySelector(".new__input");
-  const form = document.querySelector(".new")
+  const photo_file = document.querySelector(".form-picture__input");
+  const form = document.querySelector(".form-picture")
 
-  photo_file.addEventListener("change", () => form.submit());
+  if (photo_file) {
+    photo_file.addEventListener("change", () => form.submit());
+  }
 }
 
 main();

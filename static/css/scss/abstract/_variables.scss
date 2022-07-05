@@ -1,1 +1,9 @@
-$smallPadding: 10%
+@use 'fonts';
+
+$mainColor: #4CDAFA;
+$mainTextColor: black;
+$categoryColor: black;
+$categoryWithoutColor: rgb(196, 196, 196);
+$categoryTextColor: white;
+$deleteTextColor: #DB0D0D;
+$mainFont: 'Montserrat', sans-serif;

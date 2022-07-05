@@ -4,3 +4,4 @@
 media
 *.bat
 __pycache__/
+*.pdf

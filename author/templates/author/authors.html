@@ -2,16 +2,21 @@
 
 {% block content %}
   <h1 class="main__title">Список авторов</h1>
-  <div class="main__authors">
+  <div class="main__catalog catalog">
     {% if authors %}
-      {% for author in authors %}
-        <a class="main__author author" href="{% url 'author' author.id %}">
-            <p>{{ author.nickname}}</p>
-        </a>
-      {% endfor %}
+      <ol class="catalog__list">
+        {% for author in authors %}
+          <li class="catalog__item">
+            <a class="catalog__link" href="{% url 'author' author.id %}">
+              {{ author.nickname}}
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+      <a class="catalog__create" href="{% url 'author_add' %}">Добавить автора</a>
     {% else %}
-      <p>Авторов нет</p>
+      <p class="catalog__item">Авторов нет</p>
     {% endif %}
   </div>
-  <a href="{% url 'author_add' %}">Добавить автора</a>
+  
 {% endblock %}

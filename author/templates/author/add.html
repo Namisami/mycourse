@@ -3,7 +3,7 @@
   <h1 class="main__title">Добавить автора</h1>
   <form method="POST" action="" class="main__form form">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <button class="form__submit">
       Добавить
     </button>

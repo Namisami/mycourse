@@ -10,7 +10,7 @@ class PictureForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(PictureForm, self).__init__(*args, **kwargs)
         self.fields['photo_file'].widget.attrs.update({
-            'class': 'new__input',
+            'class': 'form-picture__input',
         })
 
 

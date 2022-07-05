@@ -1,5 +1,16 @@
-@use '../abstract/variables';
+@use '../abstract/variables' as vars;
 
+
+:root {
+  font-size: 16px;
+  font-family: vars.$mainFont;
+}
+a {
+  color: vars.$mainTextColor;
+  &:active {
+    font-weight: bold;
+  }
+}
 .nav {
   &__list {
     display: flex;
@@ -7,10 +18,38 @@
     list-style: none;
   }
   &__item {
-    padding-right: 10px
+    padding-right: 15px
   };
 }
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  &__label {
+    padding-right: 10px;
+  }
+  &__input {
+    border: none;
+    width: 500px;
+    height: 2.25em;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 30px;
+    ::placeholder {
+      vertical-align: middle;
+    }
+  }
+  &__start {
+    position: absolute;
+    right: 5px;
+  }
+}
 .header {
-  margin: 10px auto;
-  max-width: 900px;
+  background-color: vars.$mainColor;
+}
+.header__wrapper {
+  margin: 10px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

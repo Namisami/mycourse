@@ -38,7 +38,7 @@ def edit(request, picture_id):
             form.save()
             return HttpResponseRedirect(reverse('picture', kwargs={'picture_id': picture.id}))
     else:
-        form = PictureMainEditForm()
+        form = PictureMainEditForm(instance=picture)
     context = {
         'form': form,
         'picture': picture,
@@ -62,7 +62,7 @@ def edit_subcategory(request, picture_id):
             }
             return HttpResponseRedirect(reverse('picture', kwargs={'picture_id': picture.id}))
     else:
-        form = PictureSubcategoryEditForm()
+        form = PictureSubcategoryEditForm(instance=picture)
         form.fields["subcategory"].queryset = Subcategory.objects.filter(category=picture.category.id)
     context = {
         'form': form,

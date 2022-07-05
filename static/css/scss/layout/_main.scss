@@ -1,4 +1,4 @@
-@use "../abstract/variables";
+@use "../abstract/variables" as vars;
 
 html,
 body {
@@ -11,31 +11,32 @@ body {
 a {
   text-decoration: none;
 }
-label {
-  // display: none;
+strong {
+  font-weight: bold;
+}
+ol {
+  list-style: decimal;
 }
 .main {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  min-width: 900px;
-  margin: 0 auto;
+  margin: 0 10%;
   &__title {
     font-size: 2em;
+    margin: 1em 0 0 0;
     font-weight: bold;
     text-align: center;
   }
-  &__albums, &__photos {
-    display: grid;
-    grid-template-rows: min-content;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+  &__subtitle {
+    font-size: 1.5em;
+    margin: 1em 0 ;
+    font-weight: bold;
+    text-align: center;
   }
-  &__album {
-    border: 1px solid black;
-  }
-  &__new {
-    position: relative;
+  &__description {
+    margin: 1em auto;
+    width: 1000px;
   }
   &__create {
     border: 1px solid black;
@@ -53,36 +54,34 @@ label {
       left: 0;
     }
   }
+  &__header {
+    margin-top: 1em;
+    position: relative;
+  }
+  &__edit, &__delete {
+    display: inline;
+    position: absolute;
+    top: 10%;
+  }
+  &__edit {
+    right: 6em
+  }
+  &__delete {
+    right: 0;
+    color: vars.$deleteTextColor;
+  }
   &__full {
-    width: 100%;
+    width: 80%;
     max-height: 500px;
     margin: 15px auto;
   }
-  &__about {
-    margin: 0 auto;
-    max-width: 400px;
-    border: 1px solid black;
-    border-radius: 20px;
-  }
-  &__field {
-    vertical-align: middle;
-    text-align: center;
-    padding: 2.5px 0;
-    word-wrap: break-word;
-    &:nth-child(1) {
-      border-radius: 20px 20px 0 0;
-    }
-    &:nth-child(2n) {
-      background-color: rgb(255, 213, 135);
-    }
-    &:nth-last-child(1) {
-      display: block;
-      border-radius: 0 0 20px 20px;
-      background-color: rgb(255, 161, 72);
-    }
-  }
   &__bread {
     display: inline;
+    position: relative;
+  }
+  &__category {
+    font-size: 1.5em;
+    text-align: center;
   }
   &__photo {
     height: 300px;
@@ -90,11 +89,44 @@ label {
     object-fit: cover;
   }
 }
+.about {
+  margin: 0 auto;
+  width: 60%;
+  &__field {
+    margin: 0.6em 0;
+  }
+  &__categories {
+    line-height: 1.8em;
+  }
+  &__category {
+    border-radius: 19px;
+    border: none;
+    background-color: vars.$categoryColor;
+    color: vars.$categoryTextColor;
+    padding: 0.1em 1em;
+    &--without {
+      color: vars.$mainTextColor;
+      background-color: vars.$categoryWithoutColor;
+    }
+  }
+  &__subcategory {
+    margin-right: 0.5em;
+    background-color: vars.$mainColor;
+    color: vars.$mainTextColor;
+  }
+  &__subcategory-add {
+    padding: 0.1em 0.43em;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+}
 .form {
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 1em auto;
   :nth-child(n) {
     margin: 5px 0;
   }
@@ -102,31 +134,88 @@ label {
 textarea {
   resize: none;
 }
-.album {
+.grid {
+  margin: 1em auto;
+  width: 1000px;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 320px);
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 50px;
+  &--album {
+    grid-template-rows: repeat(auto-fill, 300px);
+  }
+  &__element {
+    box-shadow: 0 0 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  &__name {
+    text-align: center;
+    margin: auto 0;
+  }
   &__img {
     width: 300px;
     height: 300px;
     object-fit: cover;
   }
-}
-.photos {
-  &__photo {
-    height: 300px;
-    border: 1px solid black;
-    width: 300px;
-  }
-  &__img {
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-  }
-}
-.new {
-  &__input {
-    width: 100%;
-    height: 100%;
+  &__create {
     position: relative;
+    height: 320px;
     cursor: pointer;
+    &::after {
+      content: '';
+      background-image: url('../../../../media/albums/covers/newalbum.svg');
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: grey;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+.catalog {
+  max-width: 40%;
+  margin: 1em auto;
+  &__list {
+    line-height: 1.2em;
+    margin-bottom: 1em;
+  }
+  &__create {
+  }
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  &__name {
+    font-size: 2em;
+  }
+  &__header {
+    position: relative;
+  }
+  &__edit {
+    display: inline;
+    position: absolute;
+    right: 0;
+    top: 0.625em;
+  }
+  &__img {
+    margin: 1em auto;
+    min-width: 500px;
+    max-width: 100%;
+  }
+}
+.form-picture {
+  &__input {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  height: 300px;
     &::after {
       content: '';
       background-image: url('../../../../media/albums/covers/new.svg');
