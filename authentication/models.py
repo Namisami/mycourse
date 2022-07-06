@@ -8,7 +8,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name="Email", unique=True)
     first_name = models.CharField(verbose_name="Имя", max_length=255)
     last_name = models.CharField(verbose_name="Фамилия", max_length=255)
-    photo = models.ImageField(verbose_name="Аватарка", upload_to="users/photos", default="users/photos/placeholder.svg")
+    photo = models.ImageField(verbose_name="Аватарка", upload_to="users/photos", default="../static/images/avatar-placeholder.svg")
     bio = models.TextField(verbose_name="О себе", blank=True)
 
     is_active = models.BooleanField(verbose_name='Активирован', default=True)
@@ -26,5 +26,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-    # def get_absolute_url(self):
-    #     return reverse('model-detail-view', args=[str(self.id)])

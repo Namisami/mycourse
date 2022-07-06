@@ -18,15 +18,22 @@
       <button class="order__field" type="submit" name="orderby" value="upload_date">По дате</button>
     {% endif %}
   </form>
-  <div class="main__grid grid grid--album">    
+  <ul class="main__grid grid grid--album">    
     {% for picture in pictures %}
-      <a class="grid__element" href="{% url 'picture' picture.id %}">
-        <img class="grid__img" src="{{ picture.photo_file.url }}" alt="Альбомная картинка">
-      </a>
+      {% if picture.photo_file %}
+        <li class="grid__item">
+          <a class="grid__element" href="{% url 'picture' picture.id %}">
+            <img class="grid__img" src="{{ picture.photo_file.url }}" alt="Альбомная картинка">
+          </a>
+        </li>
+      {% endif %}
     {% endfor %}
-    <form class="grid__element form-picture" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.photo_file }}
-    </form>
-  </div>
+    <li class="grid__item">
+      <form class="grid__element form-picture" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img class="grid__img" src="../../static/images/new.svg" alt="">
+        {{ form }}
+      </form>
+    </li>
+  </ul>
 {% endblock %}

@@ -98,7 +98,7 @@ def edit(request, album_id):
             }
             return render(request, 'album/album.html', context)
     else:
-        form = AlbumEditForm()
+        form = AlbumEditForm(instance=album)
     context = {
         'form': form,
         'album': album,

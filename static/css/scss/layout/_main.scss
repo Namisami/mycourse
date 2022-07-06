@@ -1,5 +1,17 @@
 @use "../abstract/variables" as vars;
 
+
+:root {
+  font-size: 16px;
+  font-family: vars.$mainFont;
+}
+a {
+  color: vars.$mainTextColor;
+  text-decoration: none;
+  &:active {
+    font-weight: bold;
+  }
+}
 html,
 body {
   height: 100%;
@@ -7,9 +19,6 @@ body {
 body {
   display: flex;
   flex-direction: column;
-}
-a {
-  text-decoration: none;
 }
 strong {
   font-weight: bold;
@@ -38,36 +47,20 @@ ol {
     margin: 1em auto;
     width: 1000px;
   }
-  &__create {
-    border: 1px solid black;
-    position: relative;
-    &::after {
-      content: '';
-      background-image: url('../../../../media/albums/covers/newalbum.svg');
-      background-size: contain;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background-color: grey;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  }
   &__header {
+    display: flex;
+    flex-direction: column;
     margin-top: 1em;
-    position: relative;
   }
   &__edit, &__delete {
     display: inline;
-    position: absolute;
-    top: 10%;
+    text-align: center;
   }
   &__edit {
-    right: 6em
+    margin-top: 1em;
   }
   &__delete {
-    right: 0;
+
     color: vars.$deleteTextColor;
   }
   &__full {
@@ -149,44 +142,36 @@ textarea {
 }
 .grid {
   margin: 1em auto;
-  width: 1000px;
   display: grid;
-  grid-template-rows: repeat(auto-fill, 320px);
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr;
   gap: 50px;
-  &--album {
-    grid-template-rows: repeat(auto-fill, 300px);
+
+  &__item {
+    position: relative;
+    max-height: 320px;
+    height: 100%;
+    width: 100%;
   }
   &__element {
-    box-shadow: 0 0 4px;
     display: flex;
+    box-shadow: 0 0 4px;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 300px;
     flex-direction: column;
   }
   &__name {
     text-align: center;
-    margin: auto 0;
+    margin: 2px 0;
   }
   &__img {
-    width: 300px;
-    height: 300px;
+    max-width: 300px;
+    height: 100%;
+    width: 100%;
+    max-height: 300px;
     object-fit: cover;
-  }
-  &__create {
-    position: relative;
-    height: 320px;
-    cursor: pointer;
-    &::after {
-      content: '';
-      background-image: url('../../../../media/albums/covers/newalbum.svg');
-      background-size: contain;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background-color: grey;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
   }
 }
 .catalog {
@@ -224,22 +209,92 @@ textarea {
   }
 }
 .form-picture {
+  height: 100%;
+  & label {
+    font-size: 0;
+  }
   &__input {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  height: 300px;
-    &::after {
-      content: '';
-      background-image: url('../../../../media/albums/covers/new.svg');
-      background-size: contain;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background-color: grey;
-      position: absolute;
-      top: 0;
-      left: 0;
+    opacity: 0;
+    color: transparent;
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    z-index: 0;
+    height: 100%;
+  }
+}
+
+@media (min-width: 560px) {
+  .main {
+    &__header {
+      flex-direction: row;
     }
+    &__edit, &__delete {
+    }
+    &__edit {
+      margin-top: 0;
+      margin-left: auto;
+      margin-right: 1em;
+    }
+  }
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1300px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 2000px) {
+  .main {
+    margin: 0 20%;
+  }
+  :root {
+    font-size: 20px;
+  }
+  input {
+    font-size: 20px;
+  }
+  button {
+    font-size: 20px;
+  }
+  select {
+    font-size: 20px;
+  }
+}
+@media (min-width: 2400px) {
+  :root {
+    font-size: 24px;
+  }
+  input {
+    font-size: 24px;
+  }
+  button {
+    font-size: 24px;
+  }
+  select {
+    font-size: 24px;
+  }
+}
+
+@media print {
+  .catalog {
+    &__create {
+      display: none;
+    }
+  }
+  .grid {
+    &__create {
+      display: none;
+    }
+  }
+  .order {
+    display: none;
   }
 }

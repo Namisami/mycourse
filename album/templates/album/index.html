@@ -15,15 +15,20 @@
       <button class="order__field" type="submit" name="orderby" value="-created_at">По дате(-)</button>
     {% endif %}
   </form>
-  <div class="main__grid grid">
+  <ul class="main__grid grid">
     {% for album in albums %}
-      <a class="grid__element" href="{% url 'album' album.id %}">
-        <p class="grid__name">{{ album.title }}</p>
-        <img class="grid__img" src="{{ album.cover.url }}" alt="Обложка альбома">
-      </a>
+      <li class="grid__item">
+        <a class="grid__element" href="{% url 'album' album.id %}">
+          <p class="grid__name">{{ album.title }}</p>
+          <img class="grid__img" src="{{ album.cover.url }}" alt="Обложка альбома">
+        </a>
+      </li>
     {% endfor %}
-    <a class="grid__element grid__create" href="{% url 'create' %}">
-      Создать новый альбом
-    </a>
-  </div>
+    <li class="grid__item">
+      <a class="grid__element grid__create" href="{% url 'create' %}">
+        <p class="grid__name">Создать новый альбом</p>
+        <img src="../static/images/newalbum.svg" alt="Создать новый альбом" class="grid__img">
+      </a>
+    </li>
+  </ul>
 {% endblock %}

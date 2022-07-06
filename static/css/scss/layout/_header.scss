@@ -1,43 +1,36 @@
 @use '../abstract/variables' as vars;
 
 
-:root {
-  font-size: 16px;
-  font-family: vars.$mainFont;
-}
-a {
-  color: vars.$mainTextColor;
-  &:active {
-    font-weight: bold;
-  }
-}
 .nav {
+  position: relative;
   &__list {
     display: flex;
-    flex-direction: row;
+    top: -7em;
+    position: absolute;
+    margin-left: 2em;
+    flex-direction: column;
     list-style: none;
+    transition: top 0.4s;
   }
   &__item {
     padding-right: 15px
   };
+}
+.menu-active {
+  top: 0;
+}
+.header-active {
+  padding-bottom: 4em;
 }
 .search {
   display: flex;
   align-items: center;
   position: relative;
   &__label {
-    padding-right: 10px;
+    display: none;
   }
   &__input {
-    border: none;
-    width: 500px;
-    height: 2.25em;
-    border-radius: 5px;
-    padding-left: 10px;
-    padding-right: 30px;
-    ::placeholder {
-      vertical-align: middle;
-    }
+    display: none;
   }
   &__start {
     position: absolute;
@@ -46,10 +39,77 @@ a {
 }
 .header {
   background-color: vars.$mainColor;
+  transition: padding-bottom 0.4s;
 }
 .header__wrapper {
-  margin: 10px 10%;
+  margin: 10px 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (min-width: 500px) {
+  .header__wrapper {
+    margin: 10px 5%;
+  }
+}
+
+@media (min-width: 610px) {
+  .nav {
+    &__list {
+      position: static;
+      margin-left: 0;
+      flex-direction: row;
+    }
+    &__burger {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .header__wrapper {
+    margin: 10px 10%;
+  }
+}
+
+
+@media (min-width: 1300px) {
+  .search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &__label {
+      display: block;
+      padding-right: 10px;
+    }
+    &__input {
+      display: block;
+      border: none;
+      width: 500px;
+      height: 2.25em;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 30px;
+      ::placeholder {
+        vertical-align: middle;
+      }
+    }
+    &__start {
+      position: absolute;
+      right: 5px;
+    }
+  }
+}
+
+@media (min-width: 2000px) {
+  .header__wrapper {
+    margin: 10px 20%;
+  }
+}
+
+@media print {
+  .header {
+    display: none;
+  }
 }

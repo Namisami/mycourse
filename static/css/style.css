@@ -1,23 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-:root {
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+.nav {
+  position: relative;
 }
-
-a {
-  color: black;
-}
-a:active {
-  font-weight: bold;
-}
-
 .nav__list {
   display: flex;
-  flex-direction: row;
+  top: -7em;
+  position: absolute;
+  margin-left: 2em;
+  flex-direction: column;
   list-style: none;
+  transition: top 0.4s;
 }
 .nav__item {
   padding-right: 15px;
+}
+
+.menu-active {
+  top: 0;
+}
+
+.header-active {
+  padding-bottom: 4em;
 }
 
 .search {
@@ -26,18 +29,10 @@ a:active {
   position: relative;
 }
 .search__label {
-  padding-right: 10px;
+  display: none;
 }
 .search__input {
-  border: none;
-  width: 500px;
-  height: 2.25em;
-  border-radius: 5px;
-  padding-left: 10px;
-  padding-right: 30px;
-}
-.search__input ::placeholder {
-  vertical-align: middle;
+  display: none;
 }
 .search__start {
   position: absolute;
@@ -46,13 +41,84 @@ a:active {
 
 .header {
   background-color: #4CDAFA;
+  transition: padding-bottom 0.4s;
 }
 
 .header__wrapper {
-  margin: 10px 10%;
+  margin: 10px 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (min-width: 500px) {
+  .header__wrapper {
+    margin: 10px 5%;
+  }
+}
+@media (min-width: 610px) {
+  .nav__list {
+    position: static;
+    margin-left: 0;
+    flex-direction: row;
+  }
+  .nav__burger {
+    display: none;
+  }
+}
+@media (min-width: 700px) {
+  .header__wrapper {
+    margin: 10px 10%;
+  }
+}
+@media (min-width: 1300px) {
+  .search {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .search__label {
+    display: block;
+    padding-right: 10px;
+  }
+  .search__input {
+    display: block;
+    border: none;
+    width: 500px;
+    height: 2.25em;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 30px;
+  }
+  .search__input ::placeholder {
+    vertical-align: middle;
+  }
+  .search__start {
+    position: absolute;
+    right: 5px;
+  }
+}
+@media (min-width: 2000px) {
+  .header__wrapper {
+    margin: 10px 20%;
+  }
+}
+@media print {
+  .header {
+    display: none;
+  }
+}
+:root {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+a:active {
+  font-weight: bold;
 }
 
 html,
@@ -63,10 +129,6 @@ body {
 body {
   display: flex;
   flex-direction: column;
-}
-
-a {
-  text-decoration: none;
 }
 
 strong {
@@ -99,36 +161,19 @@ ol {
   margin: 1em auto;
   width: 1000px;
 }
-.main__create {
-  border: 1px solid black;
-  position: relative;
-}
-.main__create::after {
-  content: "";
-  background-image: url("../../../../media/albums/covers/newalbum.svg");
-  background-size: contain;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-color: grey;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 .main__header {
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
-  position: relative;
 }
 .main__edit, .main__delete {
   display: inline;
-  position: absolute;
-  top: 10%;
+  text-align: center;
 }
 .main__edit {
-  right: 6em;
+  margin-top: 1em;
 }
 .main__delete {
-  right: 0;
   color: #DB0D0D;
 }
 .main__full {
@@ -214,45 +259,36 @@ textarea {
 
 .grid {
   margin: 1em auto;
-  width: 1000px;
   display: grid;
-  grid-template-rows: repeat(auto-fill, 320px);
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr;
   gap: 50px;
 }
-.grid--album {
-  grid-template-rows: repeat(auto-fill, 300px);
+.grid__item {
+  position: relative;
+  max-height: 320px;
+  height: 100%;
+  width: 100%;
 }
 .grid__element {
-  box-shadow: 0 0 4px;
   display: flex;
+  box-shadow: 0 0 4px;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 300px;
   flex-direction: column;
 }
 .grid__name {
   text-align: center;
-  margin: auto 0;
+  margin: 2px 0;
 }
 .grid__img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-}
-.grid__create {
-  position: relative;
-  height: 320px;
-  cursor: pointer;
-}
-.grid__create::after {
-  content: "";
-  background-image: url("../../../../media/albums/covers/newalbum.svg");
-  background-size: contain;
-  width: 100%;
+  max-width: 300px;
   height: 100%;
-  z-index: 1;
-  background-color: grey;
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
 }
 
 .catalog {
@@ -288,25 +324,93 @@ textarea {
   max-width: 100%;
 }
 
+.form-picture {
+  height: 100%;
+}
+.form-picture label {
+  font-size: 0;
+}
 .form-picture__input {
-  position: relative;
+  opacity: 0;
+  color: transparent;
+  position: absolute;
   cursor: pointer;
   width: 100%;
-  height: 300px;
-}
-.form-picture__input::after {
-  content: "";
-  background-image: url("../../../../media/albums/covers/new.svg");
-  background-size: contain;
-  width: 100%;
+  z-index: 0;
   height: 100%;
-  z-index: 1;
-  background-color: grey;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
+@media (min-width: 560px) {
+  .main__header {
+    flex-direction: row;
+  }
+  .main__edit {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: 1em;
+  }
+}
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1300px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 2000px) {
+  .main {
+    margin: 0 20%;
+  }
+
+  :root {
+    font-size: 20px;
+  }
+
+  input {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 20px;
+  }
+
+  select {
+    font-size: 20px;
+  }
+}
+@media (min-width: 2400px) {
+  :root {
+    font-size: 24px;
+  }
+
+  input {
+    font-size: 24px;
+  }
+
+  button {
+    font-size: 24px;
+  }
+
+  select {
+    font-size: 24px;
+  }
+}
+@media print {
+  .catalog__create {
+    display: none;
+  }
+
+  .grid__create {
+    display: none;
+  }
+
+  .order {
+    display: none;
+  }
+}
 .footer {
   margin-top: 50px;
   height: 55px;
@@ -315,7 +419,7 @@ textarea {
   background-color: #4CDAFA;
 }
 .footer__wrapper {
-  margin: 10px 10%;
+  margin: 10px 2%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -323,6 +427,27 @@ textarea {
 }
 .footer__fio {
   width: 100%;
+}
+
+@media (min-width: 500px) {
+  .footer__wrapper {
+    margin: 10px 5%;
+  }
+}
+@media (min-width: 700px) {
+  .footer__wrapper {
+    margin: 10px 10%;
+  }
+}
+@media (min-width: 2000px) {
+  .footer__wrapper {
+    margin: 10px 20%;
+  }
+}
+@media print {
+  .footer {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
