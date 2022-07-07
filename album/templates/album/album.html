@@ -11,6 +11,7 @@
   </div>
   <h1 class="main__title">{{ album.title }}</h1>
   <p class="main__count">(Всего: {{ pictures.count }})</p>
+  <p class="main__description">{{ album.description }}</p>
   <form class="main__order order" action="{% url 'album' album.id %}" method="get" id="sortPictures">
     {% if upload_date %}
       <button class="order__field" type="submit" name="orderby" value="-upload_date">По дате(-)</button>
@@ -31,7 +32,7 @@
     <li class="grid__item">
       <form class="grid__element form-picture" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <img class="grid__img" src="../../static/images/new.svg" alt="">
+        <img class="grid__img" src="{% static 'images/new.svg' %}" alt="">
         {{ form }}
       </form>
     </li>

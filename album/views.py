@@ -1,4 +1,3 @@
-import imp
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -93,10 +92,9 @@ def edit(request, album_id):
             about.owner = user
             about.save()
             context = {
-                'form': form,
                 'album': album,
             }
-            return render(request, 'album/album.html', context)
+            return HttpResponseRedirect(reverse('album', kwargs={'album_id': album.id}))
     else:
         form = AlbumEditForm(instance=album)
     context = {

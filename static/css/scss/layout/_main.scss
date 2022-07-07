@@ -45,7 +45,7 @@ ol {
   }
   &__description {
     margin: 1em auto;
-    width: 1000px;
+    width: 60%;
   }
   &__header {
     display: flex;
@@ -181,6 +181,9 @@ textarea {
     line-height: 1.2em;
     margin-bottom: 1em;
   }
+  &__item {
+    word-break: break-all;
+  }
   &__create {
   }
 }
@@ -195,16 +198,17 @@ textarea {
   }
   &__header {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
   &__edit {
     display: inline;
-    position: absolute;
-    right: 0;
-    top: 0.625em;
   }
   &__img {
     margin: 1em auto;
-    min-width: 500px;
+    min-width: 50%;
     max-width: 100%;
   }
 }
@@ -242,6 +246,14 @@ textarea {
 @media (min-width: 760px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .profile {
+    &__header {
+      flex-direction: row;
+    }
   }
 }
 
@@ -296,5 +308,10 @@ textarea {
   }
   .order {
     display: none;
+  }
+  .profile {
+    &__edit {
+      display: none;
+    }
   }
 }

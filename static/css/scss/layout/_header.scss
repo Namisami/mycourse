@@ -13,8 +13,17 @@
     transition: top 0.4s;
   }
   &__item {
-    padding-right: 15px
   };
+  &__link {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    transition: color 0.2s, background-color 0.2s;
+    &:hover {
+      color: vars.$hoverTextColor;
+      background-color: vars.$linkHoverBgColor;
+    }
+  }
 }
 .menu-active {
   top: 0;
@@ -58,7 +67,7 @@
   .nav {
     &__list {
       position: static;
-      margin-left: 0;
+      margin-left: -1em;
       flex-direction: row;
     }
     &__burger {
