@@ -4,5 +4,4 @@
 media
 *.sqlite3
 *.bat
-*.pdf
-__pycache__/
+**/__pycache__
