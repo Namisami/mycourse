@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if category %}
+    <div class="main__header">
+      <div class="main__bread bread">
+        <a href="{% url 'categories' %}" class="bread__link">Категории/</a>
+      </div>
+      <a href="{% url 'category_edit' category.id %}" class="main__edit">Редактировать</a>
+      <a href="{% url 'category_delete' category.id %}" class="main__delete">Удалить</a>
+    </div>
+    <h1 class="main__title">{{ category.title }}</h1>
+
+    <p class="main__description">{{ category.description }}</p>
+    <h2 class="main__subtitle">Подкатегории</h2>
+    <p class="main__count">(Всего: {{ subcategories.count }})</p>
+    <div class="main__catalog catalog">
+      <ol class="catalog__list">
+        {% for subcategory in subcategories %}
+          <li class="catalog__item">
+            <a class="catalog__link" href="{% url 'subcategory' category.id subcategory.id %}">{{ subcategory.title }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+      <a href="{% url 'subcategory_create' category.id %}" class="catalog__create">Создать подкатегорию</a>
+    </div>
+  {% else %}
+    <h1 class="main__title">Список категорий</h1>
+    <p class="main__count">(Всего: {{ categories.count }})</p>
+    <div class="main__catalog catalog">
+      <ol class="catalog__list">
+        {% for category in categories %}
+          <li class="catalog__item">
+            <a class="catalog__link" href="{% url 'category' category.id %}">{{ category.title }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+      <a href="{% url 'category_create' %}" class="catalog__create">Создать категорию</a>
+    </div>
+  {% endif %}
+{% endblock %}

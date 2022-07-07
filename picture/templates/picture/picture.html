@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="main__header">
+    <div class="main__bread bread">
+      <a href="{% url 'index' %}" class="bread__link">Альбомы/</a>
+      <a href="{% url 'album' album.id %}" class="bread__link">{{ album.title }}/</a>
+    </div>
+    <a class="main__edit" href="{% url 'edit' picture.id %}">
+      Редактировать
+    </a>
+    <a class="main__delete" href="{% url 'picture_delete' picture.id %}">
+      Удалить
+    </a>
+  </div>
+  <img class="main__full" src="{{ picture.photo_file.url }}" alt="Picture" style="object-fit: contain;">
+  {% if form %}
+    <form class="main__form form" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="form__submit" type="submit">Изменить</button>
+    </form>
+  {% else %}
+    <div class="main__about about">
+      {% if picture.author %}
+        <p class="about__field">Автор: <strong>{{ picture.author }}</strong></p>
+      {% else %}
+        <p class="about__field">Автор: <strong>не указан</strong></p>
+      {% endif %}
+
+      {% if picture.description %}
+        <p class="about__field">{{ picture.description }}</p>
+      {% endif %}
+      
+      <div class="about__field about__categories">
+        {% if picture.category %}
+          <a class="about__category">{{ picture.category }}</a>
+          {% if picture.subcategory.count %}
+            {% for subcategory in picture.subcategory.all %}
+              <a class="about__category about__subcategory">{{ subcategory }}</a>
+            {% endfor %}
+            <a class="about__subcategory-add" href="{% url 'edit_subcategory' picture.id %}">
+              +
+            </a>
+          {% else %}
+            {% if picture.category %}
+              <a class="about__subcategory-add" href="{% url 'edit_subcategory' picture.id %}">
+                +
+              </a>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          <a class="about__field about__category about__category--without">Без категории</a>
+        {% endif %}
+      </div>
+
+      <p class="about__field">Дата загрузки: {{ picture.upload_date }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

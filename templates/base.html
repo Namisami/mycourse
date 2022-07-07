@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,94 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Главная</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
-<body>
-  {% block content %}
-  {% endblock content %}
+<body class="body" id="body">
+  <header class="header">
+    <div class="header__wrapper">
+      <nav class="header__nav nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="{% url 'index' %}" class="nav__link">
+              Альбомы
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="{% url 'categories' %}" class="nav__link">
+              Категории
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="{% url 'authors' %}" class="nav__link">
+              Авторы
+            </a>
+          </li>
+          {% if user.first_name %}
+            <li class="nav__item">
+              <a href="{% url 'profile' %}" class="nav__link">
+                {{ user.first_name }}
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="{% url 'logout' %}" class="nav__link">
+                Выйти
+              </a>
+            </li>
+          {% else %}
+            <li class="nav__item">
+              <a href="{% url 'login' %}" class="nav__link">
+                Войти
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="{% url 'signup' %}" class="nav__link">
+                Зарегистрироваться
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+        <svg class="nav__burger burger" width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="black" stroke-width="3" stroke-linecap="round">
+            <line x1="3" x2="18" y1="5" y2="5" />
+            <line x1="3" x2="18" y1="11" y2="11" />
+            <line x1="3" x2="18" y1="17" y2="17" />
+          </g>
+        </svg>
+      </nav>
+      <form class="header__search search" method="POST">
+        {% csrf_token %}
+        <label for="search" class="search__label">Поиск</label>
+        <input id="search" name="search" type="text" placeholder="Введите запрос" class="search__input">
+        <a href="#" class="search__start" aria-label="Поиск по странице">
+          <svg class="search__icon" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 20L15.514 15.506M18 9.5C18 11.7543 17.1045 13.9163 15.5104 15.5104C13.9163 17.1045 11.7543 18 9.5 18C7.24566 18 5.08365 17.1045 3.48959 15.5104C1.89553 13.9163 1 11.7543 1 9.5C1 7.24566 1.89553 5.08365 3.48959 3.48959C5.08365 1.89553 7.24566 1 9.5 1C11.7543 1 13.9163 1.89553 15.5104 3.48959C17.1045 5.08365 18 7.24566 18 9.5V9.5Z" stroke="black" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </form>
+    </div>
+  </header>
+  <main class="main">
+      {% block content %}
+      {% endblock content %}
+  </main>
+  <footer class="footer">
+    <div class="footer__wrapper">
+      <p class="footer__fio">
+        Хасанов Марат Сергеевич 211-322
+      </p>
+      <a href="#body" class="footer__link" aria-label="Вернуться к началу">
+        <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="black"/>
+          <g stroke="white" stroke-width="2" stroke-linecap="round">
+            <line x1="20" x2="20" y1="10" y2="30" />
+            <line x1="15" x2="20" y1="15" y2="10" />
+            <line x1="25" x2="20" y1="15" y2="10" />
+          </g>
+        </svg>
+      </a>
+    </div>
+  </footer>
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

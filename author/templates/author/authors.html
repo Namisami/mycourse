@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="main__title">Список авторов</h1>
+  <p class="main__count">(Всего: {{ authors.count }})</p>
+  <div class="main__catalog catalog">
+    {% if authors %}
+      <ol class="catalog__list">
+        {% for author in authors %}
+          <li class="catalog__item">
+            <a class="catalog__link" href="{% url 'author' author.id %}">
+              {{ author.nickname}}
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+      <a class="catalog__create" href="{% url 'author_add' %}">Добавить автора</a>
+    {% else %}
+      <p class="catalog__item">Авторов нет</p>
+    {% endif %}
+  </div>
+  
+{% endblock %}

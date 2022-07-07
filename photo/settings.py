@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My apps
-    # 'authentication',
+    'authentication',
     'album',
     'author',
     'category',
@@ -77,7 +77,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'photo.wsgi.application'
 
-# AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'authentication.User'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = "index"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -125,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR  / 'static'
+STATICFILES_DIRS = [BASE_DIR  / 'static']
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR  / 'media'

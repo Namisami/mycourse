@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="main__title">Профиль</h1><br>
+  <div class="main__profile profile">
+    <div class="profile__header">
+      <p class="profile__name">{{ user.first_name }} {{ user.last_name }}</p>
+      <a class="profile__edit" href="{% url 'profile_edit' %}">Редактировать</a>
+    </div>
+    <img class="profile__img" src="{{ user.photo.url }}" alt="Аватарка">
+    <p class="profile__description">{{ user.bio }}</p>
+  </div>
+{% endblock %}

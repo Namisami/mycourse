@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="main__header">
+    <div class="main__bread bread">
+      <a href="{% url 'categories' %}" class="bread__link">Категории/</a>
+      <a href="{% url 'category' subcategory.category.id %}" class="bread__link">{{ subcategory.category }}/</a>
+    </div>
+    <a href="{% url 'subcategory_edit' subcategory.category.id subcategory.id %}" class="main__edit">Редактировать</a>
+    <a href="{% url 'subcategory_delete' subcategory.category.id subcategory.id %}" class="main__delete">Удалить</a>
+  </div>
+  <h1 class="main__title">{{ subcategory.title }}</h1>
+  <p class="main__category">{{ subcategory.category }}</p>
+
+  <p class="main__description">{{ subcategory.description }}</p>
+{% endblock %}

@@ -1,20 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <p> АЛЬБОМ </p>
-  <p>{{ album.title }}</p>
-  {% for picture in album.picture.all %}
-    <a>
-      <img src="{{ picture.photo_file.url }}" alt="Picture of album" width="300" height="300" style="object-fit: cover;">
-    </a>
-  {% endfor %}
-
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Загрузить новое</button>
+  <div class="main__header">
+    <div class="main__bread bread">
+      <a href="{% url 'index' %}" class="bread__link">Альбомы/</a>
+    </div>
+    <a href="{% url 'album_edit' album.id %}" class="main__edit">Редактировать</a>
+      <a href="{% url 'album_delete' album.id %}" class="main__delete">Удалить</a>
+  </div>
+  <h1 class="main__title">{{ album.title }}</h1>
+  <p class="main__count">(Всего: {{ pictures.count }})</p>
+  <p class="main__description">{{ album.description }}</p>
+  <form class="main__order order" action="{% url 'album' album.id %}" method="get" id="sortPictures">
+    {% if upload_date %}
+      <button class="order__field" type="submit" name="orderby" value="-upload_date">По дате(-)</button>
+    {% else %}
+      <button class="order__field" type="submit" name="orderby" value="upload_date">По дате</button>
+    {% endif %}
   </form>
-  {% comment %} <a>
-    <a href="{% url 'add' %}">
-  </a> {% endcomment %}
+  <ul class="main__grid grid grid--album">    
+    {% for picture in pictures %}
+      {% if picture.photo_file %}
+        <li class="grid__item">
+          <a class="grid__element" href="{% url 'picture' picture.id %}">
+            <img class="grid__img" src="{{ picture.photo_file.url }}" alt="Альбомная картинка">
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    <li class="grid__item">
+      <form class="grid__element form-picture" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img class="grid__img" src="{% static 'images/new.svg' %}" alt="">
+        {{ form }}
+      </form>
+    </li>
+  </ul>
 {% endblock %}

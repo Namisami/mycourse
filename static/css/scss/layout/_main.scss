@@ -1,0 +1,317 @@
+@use "../abstract/variables" as vars;
+
+
+:root {
+  font-size: 16px;
+  font-family: vars.$mainFont;
+}
+a {
+  color: vars.$mainTextColor;
+  text-decoration: none;
+  &:active {
+    font-weight: bold;
+  }
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+strong {
+  font-weight: bold;
+}
+ol {
+  list-style: decimal;
+}
+.main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+  &__title {
+    font-size: 2em;
+    margin: 1em 0 0 0;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__subtitle {
+    font-size: 1.5em;
+    margin: 1em 0 0 0;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__description {
+    margin: 1em auto;
+    width: 60%;
+  }
+  &__header {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+  }
+  &__edit, &__delete {
+    display: inline;
+    text-align: center;
+  }
+  &__edit {
+    margin-top: 1em;
+  }
+  &__delete {
+
+    color: vars.$deleteTextColor;
+  }
+  &__full {
+    width: 80%;
+    max-height: 500px;
+    margin: 15px auto;
+  }
+  &__bread {
+    display: inline;
+    position: relative;
+  }
+  &__category {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  &__count {
+    font-size: 1.25em;
+    margin: 0 auto;
+    font-weight: bold;
+  }
+}
+.about {
+  margin: 0 auto;
+  width: 60%;
+  &__field {
+    margin: 0.6em 0;
+  }
+  &__categories {
+    line-height: 1.8em;
+  }
+  &__category {
+    border-radius: 19px;
+    border: none;
+    background-color: vars.$categoryColor;
+    color: vars.$categoryTextColor;
+    padding: 0.1em 1em;
+    &--without {
+      color: vars.$mainTextColor;
+      background-color: vars.$categoryWithoutColor;
+    }
+  }
+  &__subcategory {
+    margin-right: 0.5em;
+    background-color: vars.$mainColor;
+    color: vars.$mainTextColor;
+  }
+  &__subcategory-add {
+    padding: 0.1em 0.43em;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 1em auto;
+  :nth-child(n) {
+    margin: 5px 0;
+  }
+}
+textarea {
+  resize: none;
+}
+.order {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  &__field {
+    cursor: pointer;
+    font-size: 1em;
+    color: vars.$mainTextColor;
+    font-family: vars.$mainFont;
+    border: none;
+    background-color: transparent;
+  }
+}
+.grid {
+  margin: 1em auto;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr;
+  gap: 50px;
+
+  &__item {
+    position: relative;
+    max-height: 320px;
+    height: 100%;
+    width: 100%;
+  }
+  &__element {
+    display: flex;
+    box-shadow: 0 0 4px;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 300px;
+    flex-direction: column;
+  }
+  &__name {
+    text-align: center;
+    margin: 2px 0;
+  }
+  &__img {
+    max-width: 300px;
+    height: 100%;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+}
+.catalog {
+  max-width: 40%;
+  margin: 1em auto;
+  &__list {
+    line-height: 1.2em;
+    margin-bottom: 1em;
+  }
+  &__item {
+    word-break: break-all;
+  }
+  &__create {
+  }
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  &__name {
+    font-size: 2em;
+  }
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__edit {
+    display: inline;
+  }
+  &__img {
+    margin: 1em auto;
+    min-width: 50%;
+    max-width: 100%;
+  }
+}
+.form-picture {
+  height: 100%;
+  & label {
+    font-size: 0;
+  }
+  &__input {
+    opacity: 0;
+    color: transparent;
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    z-index: 0;
+    height: 100%;
+  }
+}
+
+@media (min-width: 560px) {
+  .main {
+    &__header {
+      flex-direction: row;
+    }
+    &__edit, &__delete {
+    }
+    &__edit {
+      margin-top: 0;
+      margin-left: auto;
+      margin-right: 1em;
+    }
+  }
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .profile {
+    &__header {
+      flex-direction: row;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 2000px) {
+  .main {
+    margin: 0 20%;
+  }
+  :root {
+    font-size: 20px;
+  }
+  input {
+    font-size: 20px;
+  }
+  button {
+    font-size: 20px;
+  }
+  select {
+    font-size: 20px;
+  }
+}
+@media (min-width: 2400px) {
+  :root {
+    font-size: 24px;
+  }
+  input {
+    font-size: 24px;
+  }
+  button {
+    font-size: 24px;
+  }
+  select {
+    font-size: 24px;
+  }
+}
+
+@media print {
+  .catalog {
+    &__create {
+      display: none;
+    }
+  }
+  .grid {
+    &__create {
+      display: none;
+    }
+  }
+  .order {
+    display: none;
+  }
+  .profile {
+    &__edit {
+      display: none;
+    }
+  }
+}
