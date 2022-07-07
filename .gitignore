@@ -2,6 +2,5 @@
 *.toml
 .venv
 media
-*.sqlite3
 *.bat
-**/__pycache__
+__pycache__/
