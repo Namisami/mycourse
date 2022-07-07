@@ -3,3 +3,6 @@
 .venv
 media
 *.sqlite3
+*.bat
+*.pdf
+__pycache__/
