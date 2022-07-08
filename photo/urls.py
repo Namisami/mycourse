@@ -3,9 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from authentication import views as auth_views
+from album import views as album_views
 
 
 urlpatterns = [
+    path('', album_views.index),
     path('admin/', admin.site.urls),
     path('albums/', include('album.urls')),
     path('picture/', include('picture.urls')),
