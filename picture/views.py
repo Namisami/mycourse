@@ -39,6 +39,7 @@ def edit(request, picture_id):
             return HttpResponseRedirect(reverse('picture', kwargs={'picture_id': picture.id}))
     else:
         form = PictureMainEditForm(instance=picture)
+        form.fields["category"].queryset = Category.objects.filter(owner=user)
     context = {
         'form': form,
         'picture': picture,

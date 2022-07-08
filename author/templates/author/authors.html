@@ -16,7 +16,8 @@
       </ol>
       <a class="catalog__create" href="{% url 'author_add' %}">Добавить автора</a>
     {% else %}
-      <p class="catalog__item">Авторов нет</p>
+      <p class="catalog__item">Авторов нет</p>        
+      <a class="catalog__create" href="{% url 'author_add' %}">Добавить автора</a>
     {% endif %}
   </div>
   
